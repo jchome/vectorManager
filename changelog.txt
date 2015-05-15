@@ -1,6 +1,6 @@
 ChangeLog:
 
-1.2 : 
+1.2 : Added the Vector.flatDisplay method
 
 1.1 : Added IE support (bugfix on array sorting)
 
