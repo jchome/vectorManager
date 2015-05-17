@@ -3,10 +3,11 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-<script type="text/javascript" src="js/vectorManager-1.1-min.js"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
+<script type="text/javascript" src="js/vectorManager-src.js"></script>
 <link href="css/vectorManager.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
 <script language="javascript">
 $(document).ready(function () {
 	var height = $(window).height() - 50;
@@ -57,7 +58,8 @@ $(window).resize(function(){
 		<li><a href="#vect_flatDisplay">JQueryObject Vector.vect_flatDisplay (&lt;<i>arrayOfVector</i>&gt;, 
 		&lt;<i>containerObj</i>&gt;, &lt;<i>startRulerValue</i>&gt;, &lt;<i>endRulerValue</i>&gt;, 
 		&lt;<i>cssClass</i>&gt;)</a></li>
-		
+		<li><a href="#getBounds">[start,stop] Vector.getBounds (&lt;<i>arrayOfVector</i>&gt;)</a></li>
+		<li><a href="#ountOverlaps">integer Vector.countOverlaps (&lt;<i>arrayOfVector</i>&gt;)</a></li>
 	</ul>
 	<h2><a href="#Copyright">Copyright</a></h2>
 	</div>
@@ -637,7 +639,7 @@ Vector.niceDisplay([new Vector(4,2) , new Vector(8,7)], $("#vect_niceDisplay_1")
 			<div id="vect_niceDisplay_1"></div>
 		</div>
 
-<h3 class="api"><a name="vect_flatDisplay" id="vect_flatDisplay">JQueryObject Vector.flatDisplay(&lt;<i>arrayOfVector</i>&gt;, 
+		<h3 class="api"><a name="vect_flatDisplay" id="vect_flatDisplay">JQueryObject Vector.flatDisplay(&lt;<i>arrayOfVector</i>&gt;, 
 		&lt;<i>containerObj</i>&gt;, &lt;<i>startRulerValue</i>&gt;, &lt;<i>endRulerValue</i>&gt;, 
 		&lt;<i>cssClass</i>&gt;)</a></h3>
 		<div class="detail">
@@ -667,6 +669,56 @@ Vector.niceDisplay([new Vector(4,2) , new Vector(8,7)], $("#vect_niceDisplay_1")
 			<pre class="prettyprint lang-js">
 Vector.flatDisplay([new Vector(4,2) , new Vector(8,7)], $("#vect_flatDisplay_1"),0,20);
 	</pre>
+		</div>
+		
+		
+<script type="text/javascript">
+$(document).ready(function() {
+	Vector.niceDisplay([new Vector(4,2) , new Vector(8,7)], $("#getBounds_1"),0,20);
+});
+</script>
+		<h3 class="api"><a name="getBounds" id="getBounds">[start,stop] Vector.getBounds (&lt;<i>arrayOfVector</i>&gt;)</a></h3>
+		<div class="detail">
+			Recupère les bords de l'ensemble des vecteurs du tableau passé en paramètre.
+			<ul>
+				<li>
+					<i>arrayOfVector</i> : tableau de vecteurs
+				</li>
+			</ul>
+			<br><br>
+			Exemple:
+			<br>
+			<pre class="prettyprint lang-js">
+Vector.getBounds( [new Vector(4,2) , new Vector(8,7)] );
+	</pre>
+	Retourne [4,15] :<br><br>
+			<div id="getBounds_1"></div>
+
+		</div>
+		
+<script type="text/javascript">
+$(document).ready(function() {
+	Vector.niceDisplay([new Vector(4,2), new Vector(6,3), new Vector(8,7)], $("#countOverlaps_1"),0,20);
+});
+</script>
+		<h3 class="api"><a name="countOverlaps" id="countOverlaps">integer Vector.countOverlaps (&lt;<i>arrayOfVector</i>&gt;)</a></h3>
+		<div class="detail">
+			Compte le nombre de lignes nécessaires pour afficher les vecteurs du tableau passé en paramètre, 
+			sans qu'il ne se chevauchent.
+			<ul>
+				<li>
+					<i>arrayOfVector</i> : tableau de vecteurs
+				</li>
+			</ul>
+			<br><br>
+			Exemple:
+			<br>
+			<pre class="prettyprint lang-js">
+Vector.countOverlaps( [new Vector(4,2), new Vector(6,3), new Vector(8,7)] );
+	</pre>
+	Retourne 2 :<br><br>
+			<div id="countOverlaps_1"></div>
+
 		</div>
 <br>
 <br>

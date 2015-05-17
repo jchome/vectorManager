@@ -377,5 +377,39 @@ Vector.flatDisplay = function(arrayOfVector, containerObj, startRulerValue, endR
 		
 	}
 	return containerObj;
+}
 
+Vector.getBounds = function(arrayOfVector){
+	if(arrayOfVector.length == 0){
+		return [0,0];
+	}
+	var firstValue = arrayOfVector[0].getBegin();
+	var lastValue = arrayOfVector[0].getEnd();
+	if(arrayOfVector.length > 1){
+		for(var v=1;v<arrayOfVector.length;v++){
+			var vector = arrayOfVector[v];
+			if(vector.getBegin() < firstValue){
+				firstValue = vector.getBegin();
+			}
+			if(vector.getEnd() > lastValue){
+				lastValue = vector.getEnd();
+			}
+		}
+	}
+	return [firstValue, lastValue];
+}
+
+Vector.countOverlaps = function(arrayOfVector){
+	var bounds = Vector.getBounds(arrayOfVector);
+	var nb_overlaps_maxi = 0;
+	for(var step=bounds[0];step<bounds[1];step++){
+		var nb_overlaps = 0;
+		for(var i=0;i<arrayOfVector.length;i++){
+			nb_overlaps += (arrayOfVector[i].containsValue(step))?(1):(0);
+		}
+		if(nb_overlaps_maxi < nb_overlaps){
+			nb_overlaps_maxi = nb_overlaps;
+		}
+	}
+	return nb_overlaps_maxi;
 }

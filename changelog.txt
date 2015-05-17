@@ -1,4 +1,5 @@
 ChangeLog:
+1.3 : Added methods Vector.getBounds(), Vector.countOverlaps()
 
 1.2 : Added the Vector.flatDisplay method
 
