@@ -42,6 +42,7 @@ Vector = function(origin,length) {
 $.extend(Vector.prototype, {
 	__begin : 0,
 	__length : 0,
+	precision : 0.02,
 	
 	init: function(origin,length){
 		this.setBegin(origin);
@@ -62,15 +63,15 @@ $.extend(Vector.prototype, {
 	},
 	
 	setBegin : function(a){
-		this.__begin = a;
+		this.__begin = Math.round(a/this.precision)*this.precision;
 		return this;
 	},
 	setLength : function(a){
-		this.__length = a;
+		this.__length = Math.round(a/this.precision)*this.precision;
 		return this;
 	},
 	setEnd : function(a){
-		this.__length = a - this.getBegin();
+		this.__length = Math.round(a/this.precision)*this.precision - this.getBegin();
 		return this;
 	},
 	
@@ -113,7 +114,7 @@ $.extend(Vector.prototype, {
 		return this.isBefore(anotherVerctor) && this.getEnd() > anotherVerctor.getBegin();
 	},
 	containsValue: function(a){
-		return (a >= this.getBegin()) && (a<this.getEnd());
+		return (a >= parseInt(this.getBegin())) && (a < Math.ceil(this.getEnd()));
 	},
 	/**
 	 * Get all values from this.getBegin() to this.getEnd()-1
@@ -371,7 +372,6 @@ Vector.flatDisplay = function(arrayOfVector, containerObj, startRulerValue, endR
 		spanVector.width( (fullWidth / (endRulerValue-startRulerValue+1)) );
 		if(Vector.oneContainsValue(i, arrayOfVector)) {
 			spanVector.addClass("valueIsContained");
-			
 		}
 		lineOfVector.append(spanVector);
 		
@@ -401,7 +401,7 @@ Vector.getBounds = function(arrayOfVector){
 
 Vector.countOverlaps = function(arrayOfVector){
 	var bounds = Vector.getBounds(arrayOfVector);
-	var nb_overlaps_maxi = 0;
+	var nb_overlaps_maxi = 1;
 	for(var step=bounds[0];step<bounds[1];step++){
 		var nb_overlaps = 0;
 		for(var i=0;i<arrayOfVector.length;i++){
